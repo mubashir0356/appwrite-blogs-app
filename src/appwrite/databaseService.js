@@ -41,19 +41,6 @@ class Services {
         }
     }
 
-    async getPost(slug) {
-        try {
-            return await this.database.getDocument(
-                configVariables.appwriteDBId,
-                configVariables.appwriteCollectionId,
-                slug
-            )
-        } catch (error) {
-            console.log("Appwriten batabase service :: get post :: error", error)
-            return false
-        }
-    }
-
     async deletePost(slug) {
         try {
             await this.database.deleteDocument(
@@ -68,6 +55,33 @@ class Services {
         }
     }
 
+    async getPost(slug) {
+        try {
+            return await this.database.getDocument(
+                configVariables.appwriteDBId,
+                configVariables.appwriteCollectionId,
+                slug
+            )
+        } catch (error) {
+            console.log("Appwriten batabase service :: get post :: error", error)
+            return false
+        }
+    }
+
+    //below method will return an array of docs(objects) 
+    // queries is optional- if not provided all docs in collection will be returned
+
+    async getAllpost(queries = [Query.equal("status", "active")]) {
+        try {
+            return await this.database.listDocuments(
+                configVariables.appwriteDBId,
+                configVariables.appwriteCollectionId,
+                queries
+            )
+        } catch (error) {
+            console.log("Appwriten batabase service :: get all posts :: error", error)
+        }
+    }
     // upload file - image to storage(bucket)
 
     async uploadFile(file) {
