@@ -68,7 +68,7 @@ class Services {
         }
     }
 
-    //below method will return an array of docs(objects) 
+    // below method will return an array of docs(objects) 
     // queries is optional- if not provided all docs in collection will be returned
 
     async getAllpost(queries = [Query.equal("status", "active")]) {
@@ -82,8 +82,8 @@ class Services {
             console.log("Appwriten batabase service :: get all posts :: error", error)
         }
     }
-    // upload file - image to storage(bucket)
 
+    // upload file - image to storage(bucket)
     async uploadFile(file) {
         try {
             return await this.bucket.createFile(
